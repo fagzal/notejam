@@ -3,6 +3,6 @@ php:
  - 5.5
 before_script:
  - cd laravel/notejam
- - php composer.phar install --no-interactions
+ - composer install 
 script:
 - vendor/bin/phpunit
