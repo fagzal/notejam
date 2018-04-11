@@ -25,3 +25,6 @@ deploy:
   bucket: "notejam"
   region: us-east-2
   local_dir: build
+  skip_cleanup: true
+  on:
+    branch: travisci
