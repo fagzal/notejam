@@ -16,15 +16,23 @@ before_install:
 script:
 - docker exec -t notejam_container bash -c "/usr/local/bin/php /var/www/html/vendor/bin/phpunit"
 
-before_deploy: "mkdir build; docker save notejam:latest > build/notejam.tar"
+before_deploy: "./createbundle.sh"
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: "notejam"
-  region: us-east-2
-  local_dir: build
-  skip_cleanup: true
-  on:
-    branch: travisci
+ - provider: s3
+   access_key_id: $AWS_ACCESS_KEY_ID
+   secret_access_key: $AWS_SECRET_ACCESS_KEY
+   bucket: "notejam"
+   region: us-east-2
+   local_dir: build
+   skip_cleanup: true
+   on:
+     branch: travisci
+ - provider: codedepoy
+   access_key_id: $AWS_ACCESS_KEY_ID
+   secret_access_key: $AWS_SECRET_ACCESS_KEY
+   bucket: "notejam"
+   key: build/bundle.zip
+   application: testapp
+   deployment_group: testdg 
+
