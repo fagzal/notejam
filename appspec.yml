@@ -1,0 +1,9 @@
+version: 1.0
+os: linux
+files:
+  - source: build/notejam.tar
+    destination: /tmp/
+hooks:
+  AfterInstall:
+    - location: dockerup.sh
+      runas: ubuntu
