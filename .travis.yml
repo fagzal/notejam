@@ -35,7 +35,7 @@ deploy:
    key: build/bundle.zip
    application: testapp
    region: us-east-2
-   deployment_group: testdg 
+   deployment_group: newdpg 
    on:
      branch: travisci
 
