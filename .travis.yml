@@ -38,4 +38,3 @@ deploy:
    deployment_group: newdpg 
    on:
      branch: travisci
-
