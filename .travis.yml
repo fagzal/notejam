@@ -38,4 +38,3 @@ deploy:
    deployment_group: testdg 
    on:
      branch: travisci
-
