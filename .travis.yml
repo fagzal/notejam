@@ -35,4 +35,6 @@ deploy:
    key: build/bundle.zip
    application: testapp
    deployment_group: testdg 
+   on:
+     branch: travisci
 
