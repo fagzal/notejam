@@ -34,6 +34,7 @@ deploy:
    bucket: "notejam"
    key: build/bundle.zip
    application: testapp
+   region: us-east-2
    deployment_group: testdg 
    on:
      branch: travisci
