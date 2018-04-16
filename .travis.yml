@@ -6,6 +6,9 @@ services:
   - docker
 
 before_install:
+ - pip install --user awscli
+ - export PATH=$PATH:$HOME/.local/bin
+ - aws rds   describe-db-instances --db-instance-identifier aurorac --query 'DBInstances[0].Endpoint.Address'
  - cd laravel/notejam
  - composer install 
  - cd ../../
