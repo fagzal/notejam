@@ -24,11 +24,16 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+#$env = $app->detectEnvironment(array(
+#
+#	'local' => array('your-machine-name'),
+#
+#));
+# If running under Apache, use "local" for config
+$env = $app->detectEnvironment(function() {
+        if (@$_ENV['APACHE_PID_FILE']) return 'local';
+});
 
-	'local' => array('your-machine-name'),
-
-));
 
 /*
 |--------------------------------------------------------------------------
