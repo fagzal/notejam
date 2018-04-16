@@ -6,36 +6,31 @@ services:
   - docker
 
 before_install:
- - ./aws_credentials.sh
- - cd laravel/notejam
- - composer install 
- - cd ../../
- - docker build -f docker/Dockerfile_apache -t notejam:latest .
- - docker run --name notejam_container -d -p 80:80 notejam:latest
- - docker ps -a
+ - ./before_install.sh
 
 script:
 - docker exec -t notejam_container bash -c "/usr/local/bin/php /var/www/html/vendor/bin/phpunit"
 
-before_deploy: "./createbundle.sh"
+before_deploy: 
+ - ./before_deploy.sh
 
 deploy:
  - provider: s3
    access_key_id: $AWS_ACCESS_KEY_ID
    secret_access_key: $AWS_SECRET_ACCESS_KEY
    bucket: "notejam"
-   region: us-east-2
+   region: $AWS_DEFAULT_ZONE
    local_dir: build
    skip_cleanup: true
    on:
-     branch: travisci
+     branch: master
  - provider: codedeploy
    access_key_id: $AWS_ACCESS_KEY_ID
    secret_access_key: $AWS_SECRET_ACCESS_KEY
    bucket: "notejam"
    key: build/bundle.zip
    application: testapp
-   region: us-east-2
-   deployment_group: newdpg 
+   region: $AWS_DEFAULT_ZONE
+   deployment_group: $DEPLOYMENT_GROUP 
    on:
-     branch: travisci
+     branch: master
