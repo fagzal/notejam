@@ -13,16 +13,27 @@ RDSHOST=$(aws rds describe-db-instances --db-instance-identifier aurorac --query
 cat > laravel/notejam/app/config/local/database.php << EOL
 <?php
 
+<?php
+
 return array(
-        'driver'    => 'mysql',
-        'host'      => ${RDSHOST},
-        'database'  => 'notejam',
-        'username'  => 'notejamuser',
-        'password'  => 'xxxx',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
+	'default' => 'mysql',
+
+	'connections'	=> array(
+		'mysql'	=> array(
+	        'driver'    => 'mysql',
+	        'host'      => ${RDSHOST},
+		'port'	=> 3306,
+        	'database'  => 'toptalc',
+	        'username'  => 'aurorac_master',
+        	'password'  => '${RDS_PASSWORD}',
+	        'charset'   => 'utf8',
+        	'collation' => 'utf8_unicode_ci',
+	        'prefix'    => ''
+	)
+	)
 );
+
+
 EOL
 
 # rebuild image as files has changed
