@@ -11,7 +11,7 @@ before_install:
  - ./awscli-bundle/install -b ~/bin/aws
  - export PATH=~/bin:$PATH
  - ./aws_credentials.sh
- - export PATH=$PATH:$HOME/.local/bin
+ - aws configure
  - aws rds   describe-db-instances --db-instance-identifier aurorac --query 'DBInstances[0].Endpoint.Address'
  - cd laravel/notejam
  - composer install 
