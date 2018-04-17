@@ -13,8 +13,6 @@ RDSHOST=$(aws rds describe-db-instances --db-instance-identifier aurorac --query
 cat > laravel/notejam/app/config/local/database.php << EOL
 <?php
 
-<?php
-
 return array(
 	'default' => 'mysql',
 
