@@ -3,6 +3,7 @@
 
 # Load pushed docker image
 docker load < /tmp/notejam.tar
+rm /tmp/notejam.tar
 # Run container as name...
 docker run -d -p 80:80 --name notejam_container notejam:latest
 sleep 3
